@@ -1,0 +1,10 @@
+/* Custom button style */
+.btn-primary {
+    background-color: #f88323;
+    border-color: #f88323;
+}
+
+.btn-primary:hover {
+    background-color: #e07220; /* Slightly darker shade for hover effect */
+    border-color: #e07220;
+}

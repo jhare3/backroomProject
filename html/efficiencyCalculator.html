@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Back-Room Efficiency Calculator</title>
+    <link rel="stylesheet" href=".../css/styles_main.css">
+    <style>
+        #calculate-btn:hover,
+        #calculate-cph-btn:hover,
+        #calculate-zpph-btn:hover {
+            background-color: #e07220 !important;
+            border-color: #e07220 !important;
+            color: rgb(255, 255, 255) !important;
+        }
+        h2 {
+        color: #f88323 !important; /* Use !important to ensure it overrides Bootstrap */
+    }
+    </style>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <header class="text-center mb-4">
+        <h1 class="display-4">Back-Room Layout</h1>
+    </header>
+    <main>
+        <div class="text-center m-4 shadow">        
+            <iframe class="text-center m-4" style="border: 1px solid rgba(0, 0, 0, 0.1);" width="1200" height="500" src="https://embed.figma.com/board/5v0ndU1lMCsB9b9ypJ54Qu/Untitled?node-id=0-1&embed-host=share" allowfullscreen></iframe>
+        </div>
+
+        <header class="text-center mb-4">
+            <h1 class="display-4">Back-Room Efficiency Calculator</h1>
+        </header>
+        <section class="card p-4 m-4 shadow-sm">
+            <h2 class="h4">Calculate Pallets Processed</h2>
+            <form id="efficiency-form" class="row g-3">
+                <div class="col-md-4">
+                    <label for="pallets-start" class="form-label">Pallets to Start the Week:</label>
+                    <input type="number" id="pallets-start" name="pallets-start" class="form-control" required>
+                </div>
+                <div class="col-md-4">
+                    <label for="pallets-end" class="form-label">Pallets to End the Week:</label>
+                    <input type="number" id="pallets-end" name="pallets-end" class="form-control" required>
+                </div>
+                <div class="col-md-4">
+                    <label for="pallets-delivered" class="form-label">Pallets Delivered:</label>
+                    <input type="number" id="pallets-delivered" name="pallets-delivered" class="form-control" required>
+                </div>
+                <div class="col-md-6 d-flex align-items-end">
+                    <button type="button" id="calculate-btn" class="btn btn-primary w-100" 
+                    style="background-color: #f88323; border-color: #f88323; color: white;">Calculate</button>
+                </div>
+                <div class="col-6">
+                    <label for="pallets-processed" class="form-label">Pallets Processed:</label>
+                    <input type="number" id="pallets-processed" name="pallets-processed" class="form-control" readonly>
+                </div>
+            </form>
+        </section>
+    
+        <section class="card p-4 m-4 shadow-sm">
+            <h2 class="h4">Calculate Cartons Processed Per Hour (CPH)</h2>
+            <form id="cph-form" class="row g-3">
+                <div class="col-md-6">
+                    <label for="cph-pallets-processed" class="form-label">Pallets Processed:</label>
+                    <input type="number" id="cph-pallets-processed" name="cph-pallets-processed" class="form-control" readonly>
+                </div>
+                <div class="col-md-6">
+                    <label for="processing-hours" class="form-label">Processing Hours:</label>
+                    <input type="number" id="processing-hours" name="processing-hours" class="form-control" required>
+                </div>
+                <div class="col-6 d-flex align-items-end">
+                    <button type="button" id="calculate-cph-btn" class="btn btn-primary w-100" 
+                    style="background-color: #f88323; border-color: #f88323; color: white;">Calculate CPH</button>
+                </div>
+                <div class="col-6">
+                    <label for="cph-result" class="form-label">Cartons Processed Per Hour (CPH):</label>
+                    <input type="number" id="cph-result" name="cph-result" class="form-control" readonly>
+                </div>
+            </form>
+        </section>
+    
+        <section class="card p-4 m-4 shadow-sm">
+            <h2 class="h4">Calculate Z-Racks Pushed Per Hour (ZPPH)</h2>
+            <form id="zpph-form" class="row g-3">
+                <div class="col-md-6">
+                    <label for="z-racks-pushed" class="form-label">Z-Racks Pushed:</label>
+                    <input type="number" id="z-racks-pushed" name="z-racks-pushed" class="form-control" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="zpph-hours" class="form-label">Hours Worked:</label>
+                    <input type="number" id="zpph-hours" name="zpph-hours" class="form-control" required>
+                </div>
+                <div class="col-6 d-flex align-items-end">
+                    <button type="button" id="calculate-zpph-btn" class="btn btn-primary w-100" 
+                    style="background-color: #f88323; border-color: #f88323; color: white;">Calculate ZPPH</button>
+                </div>
+                <div class="col-6">
+                    <label for="zpph-result" class="form-label">Z-Racks Pushed Per Hour (ZPPH):</label>
+                    <input type="number" id="zpph-result" name="zpph-result" class="form-control" readonly>
+                </div>
+            </form>
+        </section>
+    </main>
+    
+    <footer>
+        <p>&copy; 2024 Sierra Back-Room Efficiency Tools Created by James Hare</p>
+    </footer>
+
+    <script>
+        // Calculate "Pallets Processed"
+        document.getElementById('calculate-btn').addEventListener('click', () => {
+            const palletsStart = parseFloat(document.getElementById('pallets-start').value) || 0;
+            const palletsEnd = parseFloat(document.getElementById('pallets-end').value) || 0;
+            const palletsDelivered = parseFloat(document.getElementById('pallets-delivered').value) || 0;
+    
+            const palletsProcessed = (palletsStart + palletsDelivered) - palletsEnd;
+            document.getElementById('pallets-processed').value = palletsProcessed.toFixed(2);
+            document.getElementById('cph-pallets-processed').value = palletsProcessed.toFixed(2);
+        });
+
+        // Calculate CPH
+        document.getElementById('calculate-cph-btn').addEventListener('click', () => {
+            const palletsProcessed = parseFloat(document.getElementById('cph-pallets-processed').value) || 0;
+            const processingHours = parseFloat(document.getElementById('processing-hours').value) || 0;
+
+            if (processingHours > 0) {
+                const cph = (palletsProcessed * 25) / processingHours;
+                document.getElementById('cph-result').value = cph.toFixed(2);
+            } else {
+                alert('Please enter a valid number of processing hours.');
+            }
+        });
+
+        // Calculate ZPH
+        document.getElementById('calculate-zph-btn').addEventListener('click', () => {
+            const zRacksHung = parseFloat(document.getElementById('z-racks-hung').value) || 0;
+            const zphHours = parseFloat(document.getElementById('zph-hours').value) || 0;
+
+            if (zphHours > 0) {
+                const zph = zRacksHung / zphHours;
+                document.getElementById('zph-result').value = zph.toFixed(2);
+            } else {
+            alert('Please enter a valid number of hours worked.');
+        }
+        });
+
+        // Calculate ZPPH
+        document.getElementById('calculate-zpph-btn').addEventListener('click', () => {
+            const zRacksPushed = parseFloat(document.getElementById('z-racks-pushed').value) || 0;
+            const zpphHours = parseFloat(document.getElementById('zpph-hours').value) || 0;
+
+            if (zpphHours > 0) {
+                const zpph = zRacksPushed / zpphHours;
+                document.getElementById('zpph-result').value = zpph.toFixed(2);
+            } else {
+                alert('Please enter a valid number of hours worked.');
+            }
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
