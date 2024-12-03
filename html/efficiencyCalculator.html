@@ -18,27 +18,82 @@
         }
         h2 {
         color: #9C1C26 !important; /* Use !important to ensure it overrides Bootstrap */
-    }
+        }
+
+                /* Modal styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            background-color: rgba(0,0,0,0.4); /* Black with opacity */
+        }
+
+            /* Modal content */
+            .modal-content {
+                background-color: #fefefe;
+                margin: 15% auto;
+                padding: 20px;
+                border: 1px solid #888;
+                width: 80%; /* Could be adjusted */
+                text-align: center;
+            }
+
+            /* Close button */
+            .close-btn {
+                color: #aaa;
+                font-size: 28px;
+                font-weight: bold;
+                position: absolute;
+                right: 15px;
+                top: 0;
+                padding: 10px;
+                cursor: pointer;
+            }
+
+            .close-btn:hover,
+            .close-btn:focus {
+                color: black;
+                text-decoration: none;
+                cursor: pointer;
+            }
+
     </style>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <header class="text-center mb-4">
-        <h1 class="display-4">Sierra Back-Room Metrics</h1>
+    <header class="text-center mb-4" style="background-color: #9C1C26;">
+        <h1 class="display-4" style="color: hsl(0, 0%, 100%);">Sierra Back-Room Metrics</h1>
     </header>
     <main>
         <!-- Submit Date -->
-         <section class="card p-4" style="background-color: rgb(253, 242, 225);">
-            <label for="submit-date">Submit Date:</label>
-            <input type="date" id="submit-date" name="submit-date" required>
+         <section class="card p-4 mb-0.2 shadow-sm col-lg-12 col-md-12" style="background-color: rgb(253, 242, 225);">
+            <h2 class="h4" style="font-weight: bold;">Goals</h2>
+            <form id="goals" class="row g-3">
+                <div class="col-md-4">
+                    <label for="cph-goal">CPH Goal</label>
+                    <input type="text" id="cph-goal" name="cph-goal" required>
+                </div>
+                <div class="col-md-4">
+                    <label for="zph-goal">ZPH Goal</label>
+                    <input type="text" id="zph-goal" name="zph-goal" required>
+                </div>
+                <div class="col-md-4">
+                    <label for="cph-goal">ZFPH Goal</label>
+                    <input type="text" id="zfph-goal" name="zfph-goal" required>
+                </div>
+            </form>
         </section>
 
         <div class="row">
             <!-- Calculate Pallets Processed -->
-            <section class="card p-4 mb-0.2 shadow-sm col-lg-6" style="background-color: rgb(253, 242, 225);">
+            <section class="card p-4 mb-0.2 shadow-sm col-lg-6 col-md-6" style="background-color: rgb(253, 242, 225);">
                 <h2 class="h4" style="font-weight: bold;">Calculate Pallets Processed</h2>
-                <form id="efficiency-form" class="row g-3">
+                <form id="pallets-processed-form" class="row g-3">
                     <div class="col-md-4">
                         <label for="pallets-start" class="form-label">Pallets to Start the Week:</label>
                         <input type="number" id="pallets-start" name="pallets-start" class="form-control" required>
@@ -62,7 +117,7 @@
                 </form>
             </section>
             <!-- Calculate CPH -->
-            <section class="card p-4 mb-0.2 shadow-sm col-lg-6" style="background-color: rgb(253, 242, 225);">
+            <section class="card p-4 mb-0.2 shadow-sm col-lg-6 col-md-6" style="background-color: rgb(253, 242, 225);">
                 <h2 class="h4" style="font-weight: bold;">Calculate Cartons Processed Per Hour (CPH)</h2>
                 <form id="cph-form" class="row g-3">
                     <div class="col-md-6">
@@ -84,7 +139,7 @@
                 </form>
             </section>
                 <!-- Calculate ZPH -->
-            <section class="card p-4 mb-2 shadow-sm col-lg-6" style="background-color: rgb(253, 242, 225);">
+            <section class="card p-4 mb-0.2 shadow-sm col-lg-6 col-md-6" style="background-color: rgb(253, 242, 225);">
                 <h2 class="h4" style="font-weight: bold;">Calculate Z-Racks Hung Per Hour (ZPH)</h2>
                 <form id="zph-form" class="row g-3">
                     <div class="col-md-6">
@@ -107,7 +162,7 @@
             </section>
 
             <!-- Calculate ZFPH -->
-            <section class="card p-4 mb-2 shadow-sm col-lg-6" style="background-color: rgb(253, 242, 225);">
+            <section class="card p-4 mb-0.2 shadow-sm col-lg-6 col-md-6" style="background-color: rgb(253, 242, 225);">
                 <h2 class="h4" style="font-weight: bold;">Calculate Z-Racks Flowed Per Hour (ZFPH)</h2>
                 <form id="zfph-form" class="row g-3">
                     <div class="col-md-6">
@@ -129,15 +184,14 @@
                 </form>
             </section>
 
-        <div class="row">
             <!-- Add Date -->
-            <section class="card p-4 shadow-sm col-lg-6 col-md-6" style="background-color: rgb(253, 242, 225);">
+            <section class="card p-4 mb-0.2 shadow-sm col-lg-6 col-md-6" style="background-color: rgb(253, 242, 225);">
                 <label for="submit-date" class="form-label">Submit Date:</label>
                 <input type="date" id="submit-date" name="submit-date" class="form-control" required>
             </section>
         
             <!-- Submit Data -->
-            <section class="card p-4 shadow-sm col-lg-6 col-md-6" style="background-color: rgb(253, 242, 225);">
+            <section class="card p-4 mb-0.2 shadow-sm col-lg-6 col-md-6" style="background-color: rgb(253, 242, 225);">
                 <h2>Submit All Data</h2>
                 <form id="submit-form">
                     <button type="submit" id="submit-btn" class="btn btn-success w-100" 
@@ -145,10 +199,16 @@
                         Submit Form
                     </button>
                 </form>
+            
+            <!-- Modal structure -->
+            <div id="modal" class="modal">
+                <div class="modal-content">
+                    <span class="close-btn" id="close-btn">&times;</span>
+                    <p id="message"></p>
+                </div>
+            </div>
             </section>
-        </div>
         
-
         <div class="text-center m-2 shadow">        
             <iframe class="text-center m-4" style="border: 1px solid rgba(0, 0, 0, 0.1);" width="1200" height="500" src="https://embed.figma.com/board/5v0ndU1lMCsB9b9ypJ54Qu/Untitled?node-id=0-1&embed-host=share" allowfullscreen></iframe>
         </div>
@@ -208,6 +268,74 @@
                 alert('Please enter a valid number of hours worked.');
             }
         });
+
+        // Wait until the DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', function () {
+            console.log("DOM is ready");
+
+            // Get the submit button and message div elements
+            const submitButton = document.getElementById("submit-btn");
+            const messageDiv = document.getElementById("message");
+            const modal = document.getElementById("modal");
+            const closeButton = document.getElementById("close-btn");
+
+            // Add the click event listener to the submit button
+            submitButton.addEventListener("click", function (event) {
+                console.log("Button clicked");
+
+                // Prevent the default form submission behavior
+                event.preventDefault();
+
+                // Parse input values
+                const cph = parseFloat(document.getElementById("cph-result").value) || 0;
+                const zph = parseFloat(document.getElementById("zph-result").value) || 0;
+                const zfph = parseFloat(document.getElementById("zfph-result").value) || 0;
+
+                const cphGoal = parseFloat(document.getElementById("cph-goal").value) || 0;
+                const zphGoal = parseFloat(document.getElementById("zph-goal").value) || 0;
+                const zfphGoal = parseFloat(document.getElementById("zfph-goal").value) || 0;
+
+                console.log(`cph: ${cph}, zph: ${zph}, zfph: ${zfph}`);
+                console.log(`cphGoal: ${cphGoal}, zphGoal: ${zphGoal}, zfphGoal: ${zfphGoal}`);
+
+                let message = "";
+
+                // Check if goals are met and create appropriate message
+                if (cph >= cphGoal && zph >= zphGoal && zfph >= zfphGoal) {
+                    message = "Congratulations! You've met all your goals!";
+                } else {
+                    message = "Keep going! Here's where you fell short: ";
+                    if (cph < cphGoal) message += `CPH is ${cphGoal - cph} below the goal. `;
+                    if (zph < zphGoal) message += `ZPH is ${zphGoal - zph} below the goal. `;
+                    if (zfph < zfphGoal) message += `ZFPH is ${zfphGoal - zfph} below the goal.`;
+                }
+
+                // Display the message in the modal
+                messageDiv.textContent = message;
+                modal.style.display = "block"; // Show the modal
+
+                // Optionally, add a success or error class for styling
+                if (cph >= cphGoal && zph >= zphGoal && zfph >= zfphGoal) {
+                    messageDiv.className = 'success'; // Success message class
+                } else {
+                    messageDiv.className = 'error'; // Error message class
+                }
+            });
+
+            // Add the click event listener to the close button
+            closeButton.addEventListener("click", function () {
+                modal.style.display = "none"; // Hide the modal when close button is clicked
+            });
+
+            // Close the modal when clicking anywhere outside the modal content
+            window.addEventListener("click", function (event) {
+                if (event.target === modal) {
+                    modal.style.display = "none"; // Hide the modal when clicking outside the modal content
+                }
+            });
+        });
+
+
 
 
     </script>
