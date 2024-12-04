@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submitted Data</title>
+    <link rel="stylesheet" href="styles_main.css"> <!-- Optional: Link your CSS file -->
+    <style>
+        /* Add some basic styling */
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+    </style>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <header class="text-center" style="background-color: #9C1C26;" >
+        <h1 class="display-4" style="color: hsl(0, 0%, 100%);">Sierra Back-Room Metrics</h1>
+    </header>
+    <main>
+        <!-- Navigation Bar -->
+        <nav style="background-color: #ffffff; padding: 10px; text-align: center;">
+            <a href="efficiencyCalculator.html" style="color: black; margin: 0 15px; text-decoration: none; font-size: 18px;">Home</a>
+            <a href="data-table.html" style="color: black; margin: 0 15px; text-decoration: none; font-size: 18px;">View Data</a>
+        </nav>
+        <section>
+            <h2>Submitted Data</h2>
+
+        <table cellpadding="10" cellspacing="0" style="width: 100%; margin-top: 20px;">
+            <thead>
+                <tr>
+                    <th>Submit Date</th>
+                    <th>CPH</th>
+                    <th>ZPH</th>
+                    <th>ZFPH</th>
+                    <th>CPH Goal</th>
+                    <th>ZPH Goal</th>
+                    <th>ZFPH Goal</th>
+                </tr>
+            </thead>
+                <tbody>
+                    <!-- Data will be dynamically inserted here -->
+                </tbody>
+            </table>
+        </section>
+        
+        <div class="text-center m-2 shadow">        
+            <iframe class="text-center m-4" style="border: 1px solid rgba(0, 0, 0, 0.1);" width="1200" height="500" src="https://embed.figma.com/board/5v0ndU1lMCsB9b9ypJ54Qu/Untitled?node-id=0-1&embed-host=share" allowfullscreen></iframe>
+        </div>
+    </main>
+    
+    <footer>
+        <p>&copy; 2024 Sierra Back-Room Efficiency Tools Created by James Hare</p>
+    </footer>
+
+    <script>
+    </script>
+</body>
+</html>

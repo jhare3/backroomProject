@@ -6,32 +6,32 @@
     <title>Back-Room Efficiency Calculator</title>
     <link rel="stylesheet" href=".../css/styles_main.css">
     <style>
-        #calculate-btn:hover,
-        #calculate-cph-btn:hover,
-        #calculate-zph-btn:hover,
-        #calculate-zfph-btn:hover {
+            #calculate-btn:hover,
+            #calculate-cph-btn:hover,
+            #calculate-zph-btn:hover,
+            #calculate-zfph-btn:hover {
             background-color: #811720 !important;
             border-color: #9C1C26 !important;
             color: rgb(255, 255, 255) !important;
-        }
-        #submit-btn:hover {
-            background-color: #3b7e4a !important;
-        }
-        h2 {
-        color: #9C1C26 !important; /* Use !important to ensure it overrides Bootstrap */
-        }
+            }
+            #submit-btn:hover {
+                background-color: #3b7e4a !important;
+            }
+            h2 {
+            color: #9C1C26 !important; /* Use !important to ensure it overrides Bootstrap */
+            }
 
-                /* Modal styles */
-        .modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1; /* Sit on top */
-            left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            background-color: rgba(0,0,0,0.4); /* Black with opacity */
-        }
+                    /* Modal styles */
+            .modal {
+                display: none; /* Hidden by default */
+                position: fixed; /* Stay in place */
+                z-index: 1; /* Sit on top */
+                left: 0;
+                top: 0;
+                width: 100%; /* Full width */
+                height: 100%; /* Full height */
+                background-color: rgba(0,0,0,0.4); /* Black with opacity */
+            }
 
             /* Modal content */
             .modal-content {
@@ -61,7 +61,24 @@
                 text-decoration: none;
                 cursor: pointer;
             }
+            
+            nav {
+            background-color: #ffffff;
+            padding: 10px;
+            text-align: center;
+            }
 
+            nav a {
+                color: white;
+                margin: 0 15px;
+                text-decoration: none;
+                font-size: 18px;
+            }
+
+            nav a:hover {
+                text-decoration: underline !important;
+
+            }
     </style>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -71,26 +88,32 @@
         <h1 class="display-4" style="color: hsl(0, 0%, 100%);">Sierra Back-Room Metrics</h1>
     </header>
     <main>
-        <!-- Goals -->
-         <section class="card p-4 mb-0.2 shadow-sm col-lg-12 col-md-12" style="background-color: rgb(253, 242, 225);">
-            <h2 class="h4" style="font-weight: bold;">Goals</h2>
-            <form id="goals" class="row g-3">
-                <div class="col-md-4">
-                    <label for="cph-goal">CPH Goal</label>
-                    <input type="text" id="cph-goal" name="cph-goal" required>
-                </div>
-                <div class="col-md-4">
-                    <label for="zph-goal">ZPH Goal</label>
-                    <input type="text" id="zph-goal" name="zph-goal" required>
-                </div>
-                <div class="col-md-4">
-                    <label for="cph-goal">ZFPH Goal</label>
-                    <input type="text" id="zfph-goal" name="zfph-goal" required>
-                </div>
-            </form>
-        </section>
+        <!-- Navigation Bar -->
+        <nav style="background-color: #ffffff; padding: 10px; text-align: center;">
+            <a href="efficiencyCalculator.html" style="color: black; margin: 0 15px; text-decoration: none; font-size: 18px;">Home</a>
+            <a href="data-table.html" style="color: black; margin: 0 15px; text-decoration: none; font-size: 18px;">View Data</a>
+        </nav>
 
         <div class="row">
+            <!-- Goals -->
+            <section class="card p-4 mb-0.2 shadow-sm col-lg-12 col-md-12" style="background-color: rgb(253, 242, 225);">
+                <h2 class="h4" style="font-weight: bold;">Goals</h2>
+                <form id="goals" class="row g-3">
+                    <div class="col-md-4">
+                        <label for="cph-goal">CPH Goal</label>
+                        <input type="text" id="cph-goal" name="cph-goal" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="zph-goal">ZPH Goal</label>
+                        <input type="text" id="zph-goal" name="zph-goal" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="cph-goal">ZFPH Goal</label>
+                        <input type="text" id="zfph-goal" name="zfph-goal" required>
+                    </div>
+                </form>
+            </section>
+            
             <!-- Calculate Pallets Processed -->
             <section class="card p-4 mb-0.2 shadow-sm col-lg-6 col-md-6" style="background-color: rgb(253, 242, 225);">
                 <h2 class="h4" style="font-weight: bold;">Calculate Pallets Processed</h2>
@@ -357,7 +380,8 @@
             });
         });
 
-
+        // DYNAMICALLY UPDATE DATA TABLE 
+        
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

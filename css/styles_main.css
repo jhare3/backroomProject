@@ -8,3 +8,77 @@
     background-color: #e07220; /* Slightly darker shade for hover effect */
     border-color: #e07220;
 }
+
+#calculate-btn:hover,
+#calculate-cph-btn:hover,
+#calculate-zph-btn:hover,
+#calculate-zfph-btn:hover {
+background-color: #811720 !important;
+border-color: #9C1C26 !important;
+color: rgb(255, 255, 255) !important;
+}
+#submit-btn:hover {
+    background-color: #3b7e4a !important;
+}
+h2 {
+color: #9C1C26 !important; /* Use !important to ensure it overrides Bootstrap */
+}
+
+        /* Modal styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    background-color: rgba(0,0,0,0.4); /* Black with opacity */
+}
+
+/* Modal content */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be adjusted */
+    text-align: center;
+}
+
+/* Close button */
+.close-btn {
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    right: 15px;
+    top: 0;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+nav {
+background-color: #ffffff;
+padding: 10px;
+text-align: center;
+}
+
+nav a {
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+nav a:hover {
+    text-decoration: underline !important;
+
+}
