@@ -1,20 +1,31 @@
-// Calculate "Pallets Processed"
+// Calculate "Pallets Processed" and "Cartons Processed"
 document.getElementById('calculate-btn').addEventListener('click', () => {
     const palletsStart = parseFloat(document.getElementById('pallets-start').value) || 0;
     const palletsEnd = parseFloat(document.getElementById('pallets-end').value) || 0;
     const palletsDelivered = parseFloat(document.getElementById('pallets-delivered').value) || 0;
 
+    // Calculate pallets processed
     const palletsProcessed = (palletsStart + palletsDelivered) - palletsEnd;
     document.getElementById('pallets-processed').value = palletsProcessed.toFixed(2);
-    document.getElementById('cph-pallets-processed').value = palletsProcessed.toFixed(2);
+
+    // Sync pallets processed with the CPH form
+    const cphPalletsProcessedField = document.getElementById('cph-pallets-processed');
+    if (cphPalletsProcessedField) {
+        cphPalletsProcessedField.value = palletsProcessed.toFixed(2);
+    }
+
+    // Calculate cartons processed (assuming 25 cartons per pallet)
+    const cartonsProcessed = palletsProcessed * 25;
+    document.getElementById('cartons-processed').value = cartonsProcessed.toFixed(2);
 });
 
-// Calculate CPH
+// Calculate CPH (Cartons Processed Per Hour)
 document.getElementById('calculate-cph-btn').addEventListener('click', () => {
-    const palletsProcessed = parseFloat(document.getElementById('cph-pallets-processed').value) || 0;
+    const palletsProcessed = parseFloat(document.getElementById('pallets-processed').value) || 0;
     const processingHours = parseFloat(document.getElementById('processing-hours').value) || 0;
 
     if (processingHours > 0) {
+        // Calculate CPH (assuming 25 cartons per pallet)
         const cph = (palletsProcessed * 25) / processingHours;
         document.getElementById('cph-result').value = cph.toFixed(2);
     } else {
@@ -91,6 +102,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Check if all form fields are filled
         const allFieldsFilled = formFields.every(field => field !== "" && field !== null);
 
+        // let unprocessedPalletSurvey = `Unprocessed Pallet Survey Data. \nCPH: ${cph} \nZPH: ${zph} \nCartons processed: ${palletsProcessed * 25} \nProcessing Hours: ${processingHours} \nRemaining Pallets: ${palletsEnd}`;
         let message = "";
 
         if (!allFieldsFilled) {

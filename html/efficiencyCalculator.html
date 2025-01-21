@@ -42,40 +42,50 @@
             </section>
             
             <!-- Calculate Pallets Processed -->
-            <section class="card p-4 mb-0.2 shadow-sm col-lg-6 col-md-6" style="background-color: rgb(253, 242, 225);">
+            <section class="card p-4 mb-0.2 shadow-sm col-lg-12 col-md-12" style="background-color: rgb(253, 242, 225);">
                 <h2 class="h4" style="font-weight: bold;">Calculate Pallets Processed</h2>
                 <form id="pallets-processed-form" class="row g-3">
+
                     <div class="col-md-4">
                         <label for="pallets-start" class="form-label">Pallets to Start the Week:</label>
                         <input type="number" id="pallets-start" name="pallets-start" class="form-control" required>
                     </div>
+
                     <div class="col-md-4">
                         <label for="pallets-end" class="form-label">Pallets to End the Week:</label>
                         <input type="number" id="pallets-end" name="pallets-end" class="form-control" required>
                     </div>
+
                     <div class="col-md-4">
                         <label for="pallets-delivered" class="form-label">Pallets Delivered:</label>
                         <input type="number" id="pallets-delivered" name="pallets-delivered" class="form-control" required>
                     </div>
-                    <div class="col-md-6 d-flex align-items-end">
+
+                    <div class="col-md-12 justify-content-end mt-3d">
                         <button type="button" id="calculate-btn" class="btn btn-primary w-100" 
                         style="background-color: #9C1C26; border-color: #9C1C26; color: white;">Calculate</button>
                     </div>
+
                     <div class="col-6">
                         <label for="pallets-processed" class="form-label">Pallets Processed:</label>
                         <input type="number" id="pallets-processed" name="pallets-processed" class="form-control" readonly>
+                    </div>    
+                    <div class="col-6">
+                        <label for="cartons-processed" class="form-label">Cartons Processed:</label>
+                        <input type="number" id="cartons-processed" name="cartons-processed" class="form-control" readonly>
                     </div>
+
                 </form>
             </section>
             <!-- Calculate CPH -->
             <section class="card p-4 mb-0.2 shadow-sm col-lg-6 col-md-6" style="background-color: rgb(253, 242, 225);">
                 <h2 class="h4" style="font-weight: bold;">Calculate Cartons Processed Per Hour (CPH)</h2>
                 <form id="cph-form" class="row g-3">
-                    <div class="col-md-6">
+                    <!-- <div class="col-md-6">
                         <label for="cph-pallets-processed" class="form-label">Pallets Processed:</label>
                         <input type="number" id="cph-pallets-processed" name="cph-pallets-processed" class="form-control" readonly>
-                    </div>
-                    <div class="col-md-6">
+                    </div> -->
+                    <div class="col-md-12">
                         <label for="processing-hours" class="form-label">Processing Hours:</label>
                         <input type="number" id="processing-hours" name="processing-hours" class="form-control" required>
                     </div>
@@ -136,7 +146,7 @@
             </section>
         
             <!-- Submit Data -->
-            <section class="card p-4 mb-0.2 shadow-sm col-lg-12 col-md-12" style="background-color: rgb(253, 242, 225);">
+            <section class="card p-4 mb-0.2 shadow-sm col-lg-6 col-md-6" style="background-color: rgb(253, 242, 225);">
                 <h2>Submit All Data</h2>
                 <form id="submit-form">
                     <label for="submit-date" class="form-label">Submit Date:</label>
