@@ -115,10 +115,10 @@ document.addEventListener('DOMContentLoaded', function () {
             if (cph >= cphGoal && zph >= zphGoal && zfph >= zfphGoal) {
                 message = "Congratulations! You've met all your goals!";
             } else {
-                message = "Good work this week! Here's where you fell short: ";
-                if (cph < cphGoal) message += `CPH is ${cphGoal - cph} below the goal. `;
-                if (zph < zphGoal) message += `ZPH is ${zphGoal - zph} below the goal. `;
-                if (zfph < zfphGoal) message += `ZFPH is ${zfphGoal - zfph} below the goal.`;
+                message = "Good work this week! Here's where you fell short:";
+                if (cph < cphGoal) message += `\nCPH is ${cphGoal - cph} below the goal. `;
+                if (zph < zphGoal) message += `\nZPH is ${zphGoal - zph} below the goal. `;
+                if (zfph < zfphGoal) message += `\n is ${zfphGoal - zfph} below the goal.`;
             }
         }
 

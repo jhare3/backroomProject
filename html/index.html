@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Back-Room Efficiency Calculator</title>
+   <link rel="stylesheet" href="../css/styles_main.css">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <header class="text-center" style="background-color: #9C1C26;" >
+        <h1 class="display-4" style="color: hsl(0, 0%, 100%);">Back-Room Metrics Calculator</h1>
+    </header>
+    <main>
+        <!-- Navigation Bar -->
+        <nav style="background-color: #ffffff; padding: 10px; text-align: center;">
+            <a href="efficiencyCalculator.html" style="color: black; margin: 0 15px; text-decoration: none; font-size: 18px;">Home</a>
+            <a href="data-table.html" style="color: black; margin: 0 15px; text-decoration: none; font-size: 18px;">View Data</a>
+            <a href="reports.html" style="color: black; margin: 0 15px; text-decoration: none; font-size: 18px;">Reports</a>
+        </nav>
+
+        <div class="row">
+            <!-- Goals -->
+            <section class="card p-4 mb-0.2 shadow-sm col-lg-12 col-md-12" style="background-color: rgb(253, 242, 225);">
+                <h2 class="h4" style="font-weight: bold;">Goals</h2>
+                <form id="goals" class="row g-3">
+                    <div class="col-md-4">
+                        <label for="cph-goal">CPH Goal</label>
+                        <input type="text" id="cph-goal" name="cph-goal" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="zph-goal">ZPH Goal</label>
+                        <input type="text" id="zph-goal" name="zph-goal" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="cph-goal">ZFPH Goal</label>
+                        <input type="text" id="zfph-goal" name="zfph-goal" required>
+                    </div>
+                </form>
+            </section>
+            
+            <!-- Calculate Pallets Processed -->
+            <section class="card p-4 mb-0.2 shadow-sm col-lg-12 col-md-12" style="background-color: rgb(253, 242, 225);">
+                <h2 class="h4" style="font-weight: bold;">Calculate Pallets Processed</h2>
+                <form id="pallets-processed-form" class="row g-3">
+
+                    <div class="col-md-4">
+                        <label for="pallets-start" class="form-label">Pallets to Start the Week:</label>
+                        <input type="number" id="pallets-start" name="pallets-start" class="form-control" required>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="pallets-end" class="form-label">Pallets to End the Week:</label>
+                        <input type="number" id="pallets-end" name="pallets-end" class="form-control" required>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="pallets-delivered" class="form-label">Pallets Delivered:</label>
+                        <input type="number" id="pallets-delivered" name="pallets-delivered" class="form-control" required>
+                    </div>
+
+                    <div class="col-md-12 justify-content-end mt-3d">
+                        <button type="button" id="calculate-btn" class="btn btn-primary w-100" 
+                        style="background-color: #9C1C26; border-color: #9C1C26; color: white;">Calculate</button>
+                    </div>
+
+                    <div class="col-6">
+                        <label for="pallets-processed" class="form-label">Pallets Processed:</label>
+                        <input type="number" id="pallets-processed" name="pallets-processed" class="form-control" readonly>
+                    </div>    
+                    <div class="col-6">
+                        <label for="cartons-processed" class="form-label">Cartons Processed:</label>
+                        <input type="number" id="cartons-processed" name="cartons-processed" class="form-control" readonly>
+                    </div>
+
+                </form>
+            </section>
+            <!-- Calculate CPH -->
+            <section class="card p-4 mb-0.2 shadow-sm col-lg-6 col-md-6" style="background-color: rgb(253, 242, 225);">
+                <h2 class="h4" style="font-weight: bold;">Calculate Cartons Processed Per Hour (CPH)</h2>
+                <form id="cph-form" class="row g-3">
+                    <!-- <div class="col-md-6">
+                        <label for="cph-pallets-processed" class="form-label">Pallets Processed:</label>
+                        <input type="number" id="cph-pallets-processed" name="cph-pallets-processed" class="form-control" readonly>
+                    </div> -->
+                    <div class="col-md-12">
+                        <label for="processing-hours" class="form-label">Processing Hours:</label>
+                        <input type="number" id="processing-hours" name="processing-hours" class="form-control" required>
+                    </div>
+                    <div class="col-6 d-flex align-items-end">
+                        <button type="button" id="calculate-cph-btn" class="btn btn-primary w-100" 
+                        style="background-color: #9C1C26; border-color: #9C1C26; color: white;">Calculate CPH</button>
+                    </div>
+                    <div class="col-6">
+                        <label for="cph-result" class="form-label">Cartons Processed Per Hour (CPH):</label>
+                        <input type="number" id="cph-result" name="cph-result" class="form-control" readonly>
+                    </div>
+                </form>
+            </section>
+                <!-- Calculate ZPH -->
+            <section class="card p-4 mb-0.2 shadow-sm col-lg-6 col-md-6" style="background-color: rgb(253, 242, 225);">
+                <h2 class="h4" style="font-weight: bold;">Calculate Z-Racks Hung Per Hour (ZPH)</h2>
+                <form id="zph-form" class="row g-3">
+                    <div class="col-md-6">
+                        <label for="z-racks-pushed" class="form-label">Number of Z-Racks Hung:</label>
+                        <input type="number" id="z-racks-pushed" name="z-racks-pushed" class="form-control" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="zph-hours" class="form-label">Hours Hanging:</label>
+                        <input type="number" id="zph-hours" name="zph-hours" class="form-control" required>
+                    </div>
+                    <div class="col-6 d-flex align-items-end">
+                        <button type="button" id="calculate-zph-btn" class="btn btn-primary w-100" 
+                        style="background-color: #9C1C26; border-color: #9C1C26; color: white;">Calculate ZPH</button>
+                    </div>
+                    <div class="col-6">
+                        <label for="zph-result" class="form-label">Z-Racks Hung Per Hour (ZPH):</label>
+                        <input type="number" id="zph-result" name="zph-result" class="form-control" readonly>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Calculate ZFPH -->
+            <section class="card p-4 mb-0.2 shadow-sm col-lg-6 col-md-6" style="background-color: rgb(253, 242, 225);">
+                <h2 class="h4" style="font-weight: bold;">Calculate Z-Racks Flowed Per Hour (ZFPH)</h2>
+                <form id="zfph-form" class="row g-3">
+                    <div class="col-md-6">
+                        <label for="z-racks-flowed" class="form-label">Number of Z-Racks Flowed:</label>
+                        <input type="number" id="z-racks-flowed" name="z-racks-flowed" class="form-control" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="zfph-hours" class="form-label">Hours Flowing:</label>
+                        <input type="number" id="zfph-hours" name="zfph-hours" class="form-control" required>
+                    </div>
+                    <div class="col-6 d-flex align-items-end">
+                        <button type="button" id="calculate-zfph-btn" class="btn btn-primary w-100" 
+                        style="background-color: #9C1C26; border-color: #9C1C26; color: white;">Calculate ZFPH</button>
+                    </div>
+                    <div class="col-6">
+                        <label for="zfph-result" class="form-label">Z-Racks Flowed Per Hour (ZFPH):</label>
+                        <input type="number" id="zfph-result" name="zfph-result" class="form-control" readonly>
+                    </div>
+                </form>
+            </section>
+        
+            <!-- Submit Data -->
+            <section class="card p-4 mb-0.2 shadow-sm col-lg-6 col-md-6" style="background-color: rgb(253, 242, 225);">
+                <h2>Submit All Data</h2>
+                <form id="submit-form">
+                    <label for="submit-date" class="form-label">Submit Date:</label>
+                    <input type="date" id="submit-date" name="submit-date" class="form-control" required>
+                    <button type="submit" id="submit-btn" class="btn btn-success w-100" 
+                        style="background-color: #4ba05f; color: #fff; border: none; font-size: 16px; cursor: pointer;">
+                        Submit Form
+                    </button>
+                </form>
+            
+            <!-- Modal structure -->
+            <div id="modal" class="modal">
+                <div class="modal-content">
+                    <span class="close-btn" id="close-btn">&times;</span>
+                    <p id="message"></p>
+                </div>
+            </div>
+            </section>
+        
+        <div class="text-center m-2 shadow">        
+            <iframe class="text-center m-4" style="border: 1px solid rgba(0, 0, 0, 0.1);" width="1200" height="500" src="https://embed.figma.com/board/5v0ndU1lMCsB9b9ypJ54Qu/Untitled?node-id=0-1&embed-host=share" allowfullscreen></iframe>
+        </div>
+    </main>
+    
+    <footer>
+        <p>&copy; 2024 Back-Room Efficiency Tools Created by James Hare</p>
+    </footer>
+
+    <script src="../scripts/script.js"></script>
+        
+    <script>
+        // Calculate "Pallets Processed" and "Cartons Processed"
+document.getElementById('calculate-btn').addEventListener('click', () => {
+    const palletsStart = parseFloat(document.getElementById('pallets-start').value) || 0;
+    const palletsEnd = parseFloat(document.getElementById('pallets-end').value) || 0;
+    const palletsDelivered = parseFloat(document.getElementById('pallets-delivered').value) || 0;
+
+    // Calculate pallets processed
+    const palletsProcessed = (palletsStart + palletsDelivered) - palletsEnd;
+    document.getElementById('pallets-processed').value = palletsProcessed.toFixed(2);
+
+    // Sync pallets processed with the CPH form
+    const cphPalletsProcessedField = document.getElementById('cph-pallets-processed');
+    if (cphPalletsProcessedField) {
+        cphPalletsProcessedField.value = palletsProcessed.toFixed(2);
+    }
+
+    // Calculate cartons processed (assuming 25 cartons per pallet)
+    const cartonsProcessed = palletsProcessed * 25;
+    document.getElementById('cartons-processed').value = cartonsProcessed.toFixed(2);
+});
+
+// Calculate CPH (Cartons Processed Per Hour)
+document.getElementById('calculate-cph-btn').addEventListener('click', () => {
+    const palletsProcessed = parseFloat(document.getElementById('pallets-processed').value) || 0;
+    const processingHours = parseFloat(document.getElementById('processing-hours').value) || 0;
+
+    if (processingHours > 0) {
+        // Calculate CPH (assuming 25 cartons per pallet)
+        const cph = (palletsProcessed * 25) / processingHours;
+        document.getElementById('cph-result').value = cph.toFixed(2);
+    } else {
+        alert('Please enter a valid number of processing hours.');
+    }
+});
+
+// Calculate ZPH
+document.getElementById('calculate-zph-btn').addEventListener('click', () => {
+    const zRacksHung = parseFloat(document.getElementById('z-racks-pushed').value) || 0;
+    const zphHours = parseFloat(document.getElementById('zph-hours').value) || 0;
+
+    if (zphHours > 0) {
+        const zph = zRacksHung / zphHours;
+        document.getElementById('zph-result').value = zph.toFixed(2);
+    } else {
+        alert('Please enter a valid number of hours worked.');
+    }
+});
+
+// Calculate ZFPH
+document.getElementById('calculate-zfph-btn').addEventListener('click', () => {
+    const zRacksFlowed = parseFloat(document.getElementById('z-racks-flowed').value) || 0;
+    const zfphHours = parseFloat(document.getElementById('zfph-hours').value) || 0;
+
+    if (zfphHours > 0) {
+        const zfph = zRacksFlowed / zfphHours;
+        document.getElementById('zfph-result').value = zfph.toFixed(2);
+    } else {
+        alert('Please enter a valid number of hours worked.');
+    }
+});
+
+// Wait until the DOM is fully loaded
+document.addEventListener('DOMContentLoaded', function () {
+    console.log("DOM is ready");
+
+    // Get the submit button and message div elements
+    const submitButton = document.getElementById("submit-btn");
+    const messageDiv = document.getElementById("message");
+    const modal = document.getElementById("modal");
+    const closeButton = document.getElementById("close-btn");
+
+    // Add the click event listener to the submit button
+    submitButton.addEventListener("click", function (event) {
+        console.log("Button clicked");
+
+        // Prevent the default form submission behavior
+        event.preventDefault();
+
+        // Parse input values
+        const cph = parseFloat(document.getElementById("cph-result").value) || 0;
+        const zph = parseFloat(document.getElementById("zph-result").value) || 0;
+        const zfph = parseFloat(document.getElementById("zfph-result").value) || 0;
+        const cphGoal = parseFloat(document.getElementById("cph-goal").value) || 0;
+        const zphGoal = parseFloat(document.getElementById("zph-goal").value) || 0;
+        const zfphGoal = parseFloat(document.getElementById("zfph-goal").value) || 0;
+        const submitDate = parseFloat(document.getElementById("zfph-goal").value) || 0;
+
+        // Get all form fields for validation
+        const formFields = [
+            cph, zph, zfph, cphGoal, zphGoal, zfphGoal, submitDate,
+            document.getElementById("pallets-start").value,
+            document.getElementById("pallets-end").value,
+            document.getElementById("pallets-delivered").value,
+            document.getElementById("processing-hours").value,
+            document.getElementById("z-racks-pushed").value,
+            document.getElementById("zph-hours").value,
+            document.getElementById("z-racks-flowed").value,
+            document.getElementById("zfph-hours").value,
+            document.getElementById("submit-date").value
+        ];
+
+        // Check if all form fields are filled
+        const allFieldsFilled = formFields.every(field => field !== "" && field !== null);
+
+        // let unprocessedPalletSurvey = `Unprocessed Pallet Survey Data. \nCPH: ${cph} \nZPH: ${zph} \nCartons processed: ${palletsProcessed * 25} \nProcessing Hours: ${processingHours} \nRemaining Pallets: ${palletsEnd}`;
+        let message = "";
+
+        if (!allFieldsFilled) {
+            message = "Please fill out all fields before submitting the form.";
+        } else {
+            console.log(`cph: ${cph}, zph: ${zph}, zfph: ${zfph}`);
+            console.log(`cphGoal: ${cphGoal}, zphGoal: ${zphGoal}, zfphGoal: ${zfphGoal}`);
+
+            // Check if goals are met and create appropriate message
+            if (cph >= cphGoal && zph >= zphGoal && zfph >= zfphGoal) {
+                message = "Congratulations! You've met all your goals!";
+            } else {
+                message = "Good work this week! Here's where you fell short:";
+                if (cph < cphGoal) message += `\nCPH is ${cphGoal - cph} below the goal. `;
+                if (zph < zphGoal) message += `\nZPH is ${zphGoal - zph} below the goal. `;
+                if (zfph < zfphGoal) message += `\n is ${zfphGoal - zfph} below the goal.`;
+            }
+        }
+
+        // Display the message in the modal
+        messageDiv.textContent = message;
+        modal.style.display = "block"; // Show the modal
+
+        // Optionally, add a success or error class for styling
+        if (allFieldsFilled) {
+            if (cph >= cphGoal && zph >= zphGoal && zfph >= zfphGoal) {
+                messageDiv.className = 'success'; // Success message class
+            } else {
+                messageDiv.className = 'error'; // Error message class
+            }
+        } else {
+            messageDiv.className = 'error'; // Error message class for incomplete fields
+        }
+    });
+
+    // Add the click event listener to the close button
+    closeButton.addEventListener("click", function () {
+        modal.style.display = "none"; // Hide the modal when close button is clicked
+    });
+
+    // Close the modal when clicking anywhere outside the modal content
+    window.addEventListener("click", function (event) {
+        if (event.target === modal) {
+            modal.style.display = "none"; // Hide the modal when clicking outside the modal content
+        }
+    });
+});
+
+// DYNAMICALLY UPDATE DATA TABLE 
+    </script>
+</body>
+</html>
