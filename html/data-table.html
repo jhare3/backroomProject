@@ -6,7 +6,6 @@
     <title>Submitted Data</title>
     <link rel="stylesheet" href=".../css/styles_main.css"> <!-- Optional: Link your CSS file -->
     <style>
-        /* Add some basic styling */
         table {
             width: 100%;
             margin-top: 20px;
@@ -25,71 +24,93 @@
             background-color: #ffffff;
             padding: 10px;
             text-align: center;
-            }
+        }
 
-            nav a {
-                color: white;
-                margin: 0 15px;
-                text-decoration: none;
-                font-size: 18px;
-            }
+        nav a {
+            color: black;
+            margin: 0 15px;
+            text-decoration: none;
+            font-size: 18px;
+        }
 
-            nav a:hover {
-                text-decoration: underline !important;
-
-            }
+        nav a:hover {
+            text-decoration: underline !important;
+        }
     </style>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <header class="text-center" style="background-color: #9C1C26;" >
+    <header class="text-center" style="background-color: #9C1C26;">
         <h1 class="display-4" style="color: hsl(0, 0%, 100%);">Back-Room Metrics</h1>
     </header>
     <main>
         <!-- Navigation Bar -->
         <nav style="background-color: #ffffff; padding: 10px; text-align: center;">
-            <a href="efficiencyCalculator.html" style="color: black; margin: 0 15px; text-decoration: none; font-size: 18px;">Home</a>
-            <a href="data-table.html" style="color: black; margin: 0 15px; text-decoration: none; font-size: 18px;">View Data</a>
-            <a href="reports.html" style="color: black; margin: 0 15px; text-decoration: none; font-size: 18px;">Reports</a>
-
+            <a href="efficiencyCalculator.html">Home</a>
+            <a href="data-table.html">View Data</a>
+            <a href="reports.html">Reports</a>
         </nav>
         <section>
             <h2>Submitted Data</h2>
 
-        <table cellpadding="10" cellspacing="0" style="width: 100%; margin-top: 20px;">
-            <thead>
-                <tr>
-                    <th>Submit Date</th>
-                    <th>CPH</th>
-                    <th>ZPH</th>
-                    <th>ZFPH</th>
-                    <th>CPH Goal</th>
-                    <th>ZPH Goal</th>
-                    <th>ZFPH Goal</th>
-                    <th>Processing Hours</th>
-                    <th>Pallets Proccessed</th>
-                    <th>Remaining Pallets</th>
-
-                </tr>
-            </thead>
+            <table id="dataTable" cellpadding="10" cellspacing="0" style="width: 100%; margin-top: 20px;">
+                <thead>
+                    <tr>
+                        <th>Submit Date</th>
+                        <th>CPH</th>
+                        <th>ZPH</th>
+                        <th>ZFPH</th>
+                        <th>CPH Goal</th>
+                        <th>ZPH Goal</th>
+                        <th>ZFPH Goal</th>
+                        <th>Processing Hours</th>
+                        <th>Pallets Processed</th>
+                        <th>Cartons Processed</th>
+                        <th>Pallets Delivered</th>
+                        <th>Remaining Pallets</th>
+                    </tr>
+                </thead>
                 <tbody>
                     <!-- Data will be dynamically inserted here -->
-                    
                 </tbody>
             </table>
         </section>
         
-        <div class="text-center m-2 shadow">        
+        <div class="text-center m-2 shadow">
             <iframe class="text-center m-4" style="border: 1px solid rgba(0, 0, 0, 0.1);" width="1200" height="500" src="https://embed.figma.com/board/5v0ndU1lMCsB9b9ypJ54Qu/Untitled?node-id=0-1&embed-host=share" allowfullscreen></iframe>
         </div>
     </main>
-    
+
     <footer>
         <p>&copy; 2024 Back-Room Efficiency Tools Created by James Hare</p>
     </footer>
 
     <script>
+        // Sample data - replace this with actual submitted data
+        const submittedData = [
+            { date: "2024-02-16", cph: 7, zph: 1, zfph: 3, cphGoal: 7, zphGoal: 2, zfphGoal: 3, hours: 60, palletsProcessed: 25, cartonsProcessed: 625, palletsDelivered: 25 ,remainingPallets: 2 },
+            { date: "2024-02-15", cph: 6, zph: 1, zfph: 3, cphGoal: 7, zphGoal: 2, zfphGoal: 3, hours: 65, palletsProcessed: 23, cartonsProcessed: 575, palletsDelivered: 25, remainingPallets: 4 }
+        ];
+
+        // Function to populate the table with submitted data
+        function populateTable() {
+            const tableBody = document.getElementById("dataTable").getElementsByTagName("tbody")[0];
+
+            // Loop through the data and create rows dynamically
+            submittedData.forEach((data) => {
+                const newRow = tableBody.insertRow();
+
+                // Create and append each cell in the row
+                Object.values(data).forEach((value, index) => {
+                    const newCell = newRow.insertCell(index);
+                    newCell.innerText = value;
+                });
+            });
+        }
+
+        // Call the function to populate the table on page load
+        window.onload = populateTable;
     </script>
 </body>
 </html>

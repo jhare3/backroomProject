@@ -5,6 +5,93 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Back-Room Efficiency Calculator</title>
    <link rel="stylesheet" href="../css/styles_main.css">
+
+   <style>
+    /* Custom button style */
+.btn-primary {
+    background-color: #f88323;
+    border-color: #f88323;
+}
+
+.btn-primary:hover {
+    background-color: #e07220; /* Slightly darker shade for hover effect */
+    border-color: #e07220;
+}
+
+#calculate-btn:hover,
+#calculate-cph-btn:hover,
+#calculate-zph-btn:hover,
+#calculate-zfph-btn:hover {
+background-color: #811720 !important;
+border-color: #9C1C26 !important;
+color: rgb(255, 255, 255) !important;
+}
+#submit-btn:hover {
+    background-color: #3b7e4a !important;
+}
+h2 {
+color: #9C1C26 !important; /* Use !important to ensure it overrides Bootstrap */
+}
+
+        /* Modal styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    background-color: rgba(0,0,0,0.4); /* Black with opacity */
+}
+
+/* Modal content */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be adjusted */
+    text-align: center;
+}
+
+/* Close button */
+.close-btn {
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    right: 15px;
+    top: 0;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+nav {
+background-color: #ffffff;
+padding: 10px;
+text-align: center;
+}
+
+nav a {
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+nav a:hover {
+    text-decoration: underline !important;
+
+}
+   </style>
     
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -101,10 +188,10 @@
             </section>
                 <!-- Calculate ZPH -->
             <section class="card p-4 mb-0.2 shadow-sm col-lg-6 col-md-6" style="background-color: rgb(253, 242, 225);">
-                <h2 class="h4" style="font-weight: bold;">Calculate Z-Racks Hung Per Hour (ZPH)</h2>
+                <h2 class="h4" style="font-weight: bold;">Calculate Z-Racks Filled Per Hour (ZPH)</h2>
                 <form id="zph-form" class="row g-3">
                     <div class="col-md-6">
-                        <label for="z-racks-pushed" class="form-label">Number of Z-Racks Hung:</label>
+                        <label for="z-racks-pushed" class="form-label">Number of Z-Racks Filled:</label>
                         <input type="number" id="z-racks-pushed" name="z-racks-pushed" class="form-control" required>
                     </div>
                     <div class="col-md-6">
@@ -116,7 +203,7 @@
                         style="background-color: #9C1C26; border-color: #9C1C26; color: white;">Calculate ZPH</button>
                     </div>
                     <div class="col-6">
-                        <label for="zph-result" class="form-label">Z-Racks Hung Per Hour (ZPH):</label>
+                        <label for="zph-result" class="form-label">Z-Racks Filled Per Hour (ZPH):</label>
                         <input type="number" id="zph-result" name="zph-result" class="form-control" readonly>
                     </div>
                 </form>
@@ -215,11 +302,11 @@ document.getElementById('calculate-cph-btn').addEventListener('click', () => {
 
 // Calculate ZPH
 document.getElementById('calculate-zph-btn').addEventListener('click', () => {
-    const zRacksHung = parseFloat(document.getElementById('z-racks-pushed').value) || 0;
+    const zRacksFilled = parseFloat(document.getElementById('z-racks-pushed').value) || 0;
     const zphHours = parseFloat(document.getElementById('zph-hours').value) || 0;
 
     if (zphHours > 0) {
-        const zph = zRacksHung / zphHours;
+        const zph = zRacksFilled / zphHours;
         document.getElementById('zph-result').value = zph.toFixed(2);
     } else {
         alert('Please enter a valid number of hours worked.');
@@ -288,6 +375,14 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!allFieldsFilled) {
             message = "Please fill out all fields before submitting the form.";
         } else {
+            // Round values to 2 decimal places
+            cph = cph.toFixed(2);
+            zph = zph.toFixed(2);
+            zfph = zfph.toFixed(2);
+            cphGoal = cphGoal.toFixed(2);
+            zphGoal = zphGoal.toFixed(2);
+            zfphGoal = zfphGoal.toFixed(2);
+
             console.log(`cph: ${cph}, zph: ${zph}, zfph: ${zfph}`);
             console.log(`cphGoal: ${cphGoal}, zphGoal: ${zphGoal}, zfphGoal: ${zfphGoal}`);
 
@@ -332,6 +427,36 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 // DYNAMICALLY UPDATE DATA TABLE 
+document.getElementById('performanceForm').addEventListener('submit', async function(event) {
+    event.preventDefault();
+
+    const data = {
+      submitDate: document.getElementById('submitDate').value,
+      cph: document.getElementById('cph-result').value,
+      zph: document.getElementById('zph-result').value,
+      zfph: document.getElementById('zfph-result').value,
+      cphGoal: document.getElementById('cph-goal').value,
+      zphGoal: document.getElementById('zph-goal').value,
+      zfphGoal: document.getElementById('zfph-goal').value,
+      processingHours: document.getElementById('processing-hours').value,
+      palletsProcessed: document.getElementById('pallets-processed').value,
+      cartonsProcessed: document.getElementById('cartons-processed').value,
+      remainingPallets: document.getElementById('remainingPallets').value,
+    };
+
+    // Send data to your backend (Node.js)
+    const response = await fetch('/submit-data', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    });
+
+    if (response.ok) {
+      alert('Data submitted successfully!');
+    } else {
+      alert('Error submitting data.');
+    }
+  });
     </script>
 </body>
 </html>
