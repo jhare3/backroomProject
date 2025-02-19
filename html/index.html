@@ -262,10 +262,10 @@ nav a:hover {
         <p>&copy; 2024 Back-Room Efficiency Tools Created by James Hare</p>
     </footer>
 
-    <script src="../scripts/script.js"></script>
+
         
     <script>
-        // Calculate "Pallets Processed" and "Cartons Processed"
+// Calculate "Pallets Processed" and "Cartons Processed"
 document.getElementById('calculate-btn').addEventListener('click', () => {
     const palletsStart = parseFloat(document.getElementById('pallets-start').value) || 0;
     const palletsEnd = parseFloat(document.getElementById('pallets-end').value) || 0;
@@ -302,11 +302,11 @@ document.getElementById('calculate-cph-btn').addEventListener('click', () => {
 
 // Calculate ZPH
 document.getElementById('calculate-zph-btn').addEventListener('click', () => {
-    const zRacksFilled = parseFloat(document.getElementById('z-racks-pushed').value) || 0;
+    const zRacksHung = parseFloat(document.getElementById('z-racks-pushed').value) || 0;
     const zphHours = parseFloat(document.getElementById('zph-hours').value) || 0;
 
     if (zphHours > 0) {
-        const zph = zRacksFilled / zphHours;
+        const zph = zRacksHung / zphHours;
         document.getElementById('zph-result').value = zph.toFixed(2);
     } else {
         alert('Please enter a valid number of hours worked.');
@@ -375,14 +375,6 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!allFieldsFilled) {
             message = "Please fill out all fields before submitting the form.";
         } else {
-            // Round values to 2 decimal places
-            cph = cph.toFixed(2);
-            zph = zph.toFixed(2);
-            zfph = zfph.toFixed(2);
-            cphGoal = cphGoal.toFixed(2);
-            zphGoal = zphGoal.toFixed(2);
-            zfphGoal = zfphGoal.toFixed(2);
-
             console.log(`cph: ${cph}, zph: ${zph}, zfph: ${zfph}`);
             console.log(`cphGoal: ${cphGoal}, zphGoal: ${zphGoal}, zfphGoal: ${zfphGoal}`);
 
@@ -393,7 +385,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 message = "Good work this week! Here's where you fell short:";
                 if (cph < cphGoal) message += `\nCPH is ${cphGoal - cph} below the goal. `;
                 if (zph < zphGoal) message += `\nZPH is ${zphGoal - zph} below the goal. `;
-                if (zfph < zfphGoal) message += `\n is ${zfphGoal - zfph} below the goal.`;
+                if (zfph < zfphGoal) message += `\nZFPH is ${zfphGoal - zfph} below the goal.`;
             }
         }
 
@@ -427,36 +419,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 // DYNAMICALLY UPDATE DATA TABLE 
-document.getElementById('performanceForm').addEventListener('submit', async function(event) {
-    event.preventDefault();
 
-    const data = {
-      submitDate: document.getElementById('submitDate').value,
-      cph: document.getElementById('cph-result').value,
-      zph: document.getElementById('zph-result').value,
-      zfph: document.getElementById('zfph-result').value,
-      cphGoal: document.getElementById('cph-goal').value,
-      zphGoal: document.getElementById('zph-goal').value,
-      zfphGoal: document.getElementById('zfph-goal').value,
-      processingHours: document.getElementById('processing-hours').value,
-      palletsProcessed: document.getElementById('pallets-processed').value,
-      cartonsProcessed: document.getElementById('cartons-processed').value,
-      remainingPallets: document.getElementById('remainingPallets').value,
-    };
-
-    // Send data to your backend (Node.js)
-    const response = await fetch('/submit-data', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
-    });
-
-    if (response.ok) {
-      alert('Data submitted successfully!');
-    } else {
-      alert('Error submitting data.');
-    }
-  });
     </script>
 </body>
 </html>

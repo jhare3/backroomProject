@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 message = "Good work this week! Here's where you fell short:";
                 if (cph < cphGoal) message += `\nCPH is ${cphGoal - cph} below the goal. `;
                 if (zph < zphGoal) message += `\nZPH is ${zphGoal - zph} below the goal. `;
-                if (zfph < zfphGoal) message += `\n is ${zfphGoal - zfph} below the goal.`;
+                if (zfph < zfphGoal) message += `\nZFPH is ${zfphGoal - zfph} below the goal.`;
             }
         }
 
